@@ -21,14 +21,14 @@ namespace CatalogAPI.DTOs
         /// <summary>
         /// status of the enrollment: true if student currently enrolled in the subject
         /// </summary>
-        [Required]
+       /* [Required]
         public bool IsActiveEnrollment { get; set; } = false;
         /// <summary>
         /// average mark per student per subject
         /// </summary>
         [Required]
         [Range(0.0, double.MaxValue)]
-        public double AvgMark { get; set; } = 0.0;
+        public double AvgMark { get; set; } = 0.0;*/
     }
 	
 }

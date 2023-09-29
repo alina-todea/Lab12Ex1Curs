@@ -32,7 +32,7 @@ namespace CatalogAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status201Created, Type=typeof(TeacherAssignement))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type=typeof(string))]
-        public async Task<ActionResult> AssignTeacherToSubjectAsync([FromBody] TeacherAssignementsToCreate assignement)
+        public async Task<ActionResult> AssignTeacherToSubject([FromBody] TeacherAssignementsToCreate assignement)
         {
             /*if (assignement.TeacherId <= 0 || assignement.SubjectId <= 0)
             {
@@ -63,7 +63,7 @@ namespace CatalogAPI.Controllers
         /// removes a teacher from a subject
         /// </summary>
         /// <param name="id">id of the teacher</param>
-        /// <param name="subjectName"> subject name</param>
+        /// <param name="subjectId"> subject id</param>
         /// <returns>returnes removed teacher's id</returns>
         [HttpDelete("RemoveFromSubject/{id}")]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]

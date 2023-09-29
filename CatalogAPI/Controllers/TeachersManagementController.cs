@@ -107,7 +107,7 @@ namespace CatalogAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status200OK, Type=typeof(TeacherToUpdate))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(StudentToCreate))]
-        public async Task<ActionResult<TeacherToGet>> UpdateTeacherAsync([Range(1, int.MaxValue)] int id,[FromBody] AddressToCreate address)
+        public async Task<ActionResult<TeacherToGet>> UpdateTeacher([Range(1, int.MaxValue)] int id,[FromBody] AddressToCreate address)
         {
             var teacherToUpdate = teachersService.GetTeacherById(id);
 
@@ -133,7 +133,7 @@ namespace CatalogAPI.Controllers
                 return BadRequest(e.Message);
             }
 
-            return CreatedAtAction(nameof(UpdateTeacherAsync), new { id = teacherToUpdate.Id }, teacherToUpdate.ToDto());
+            return CreatedAtAction(nameof(UpdateTeacher), new { id = teacherToUpdate.Id }, teacherToUpdate.ToDto());
         }
 
         /// <summary>
@@ -146,12 +146,12 @@ namespace CatalogAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TeacherToUpdate))]
 
-        public async Task<ActionResult<TeacherToGet>> UpdateTeacherDataAsync([Range(1, int.MaxValue)] int id, [FromBody] TeacherDataToUpdate teacher)
+        public async Task<ActionResult<TeacherToGet>> UpdateTeacherData([Range(1, int.MaxValue)] int id, [FromBody] TeacherDataToUpdate teacher)
         {
             try
             {
                 var teacherToUpdate = await teachersService.UpdateTeacherDataAsync(id,teacher);
-                return CreatedAtAction(nameof(UpdateTeacherDataAsync), new { id = teacherToUpdate.Id });
+                return CreatedAtAction(nameof(UpdateTeacherData), new { id = teacherToUpdate.Id });
             }
             catch (InvalidIdException e)
             {
@@ -169,7 +169,7 @@ namespace CatalogAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
 
-        public async Task<ActionResult<TeacherToGet>> DeleteAsync([Range(1, int.MaxValue)] int id)
+        public async Task<ActionResult<TeacherToGet>> Delete([Range(1, int.MaxValue)] int id)
         {
             var teacher = teachersService.GetTeacherById(id);
 

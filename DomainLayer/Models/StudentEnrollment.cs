@@ -13,8 +13,8 @@ namespace DomainLayer.Models
         public Subject ? Subject { get; set; }
         public int ? SubjectId { get; set; }
 
-        public bool IsActiveEnrollment { get; set; }
-        public double AvgMark { get; set; }
+        public bool IsActiveEnrollment { get; set; } = true;
+        public double AvgMark { get; set; } = 0.0;
     }
 }
 

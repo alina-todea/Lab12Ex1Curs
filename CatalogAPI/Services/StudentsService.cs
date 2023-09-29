@@ -132,7 +132,7 @@ namespace CatalogAPI.Services
         /// <summary>
         /// updates srtudent name and age
         /// </summary>
-        /// <param name="id"studsent id></param>
+        /// <param name="id">student id</param>
         /// <param name="studentData">new student data</param>
         /// <returns></returns>
         /// <exception cref="InvalidIdException">student id invalid</exception>

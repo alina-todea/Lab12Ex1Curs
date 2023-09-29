@@ -75,7 +75,7 @@ namespace CatalogAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(StudentToGet))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type=typeof(string))]
 
-        public async Task<ActionResult<StudentToGet>> CreateStudentAsync([FromBody] StudentToCreate studentToCreate)
+        public async Task<ActionResult<StudentToGet>> CreateStudent([FromBody] StudentToCreate studentToCreate)
         {
             var studentId = studentsService.GetStudentIdByNameAndAge(studentToCreate);
 
@@ -96,7 +96,7 @@ namespace CatalogAPI.Controllers
 
             var student = await studentsService.CreateStudentAsync(studentToCreate, addressId);
 
-            return CreatedAtAction(nameof(CreateStudentAsync), new { id = student.Id});
+            return CreatedAtAction(nameof(CreateStudent),student);
         }
 
 
@@ -113,7 +113,7 @@ namespace CatalogAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(StudentToCreate))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(StudentToCreate))]
 
-        public async Task<ActionResult<StudentToGet>> UpdateStudentAsync([Range(1, int.MaxValue)] int id, [FromBody] AddressToCreate address)
+        public async Task<ActionResult<StudentToGet>> UpdateStudent([Range(1, int.MaxValue)] int id, [FromBody] AddressToCreate address)
         {
             var studentToUpdate = studentsService.GetStudentByIdWithAddress(id, false);
 
@@ -126,7 +126,7 @@ namespace CatalogAPI.Controllers
 
             await studentsService.UpdateAddressIdAsync(id, newAddressId);
 
-            return CreatedAtAction(nameof(UpdateStudentAsync), new { id = studentToUpdate.Id }, studentToUpdate.ToDto());
+            return CreatedAtAction(nameof(UpdateStudent), new { id = studentToUpdate.Id }, studentToUpdate.ToDto());
 
         }
         /// <summary>
@@ -139,12 +139,12 @@ namespace CatalogAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(StudentToCreate))]
         
-        public async Task<ActionResult<StudentToGet>> UpdateStudentDataAsync([Range(1, int.MaxValue)] int id,[FromBody] StudentDataToUpdate student)
+        public async Task<ActionResult<StudentToGet>> UpdateStudentData([Range(1, int.MaxValue)] int id,[FromBody] StudentDataToUpdate student)
         {
             try
             {
                 var studentToUpdate = await studentsService.UpdateStudentDataAsync(id, student);
-                return CreatedAtAction(nameof(UpdateStudentDataAsync), new { id = studentToUpdate.Id});
+                return CreatedAtAction(nameof(UpdateStudentData), new { id = studentToUpdate.Id});
             }
             catch(InvalidIdException e)
             {
@@ -162,7 +162,7 @@ namespace CatalogAPI.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-        public async Task<ActionResult<StudentToGet>> DeleteStudentAsync([Range(1, int.MaxValue)] int id,  [FromQuery] bool includeAddress)
+        public async Task<ActionResult<StudentToGet>> DeleteStudent([Range(1, int.MaxValue)] int id,  [FromQuery] bool includeAddress)
         {
             try
             {

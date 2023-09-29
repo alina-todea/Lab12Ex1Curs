@@ -87,7 +87,7 @@ namespace CatalogAPI.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-        public async Task<ActionResult<StudentToGet>> DeleteAsync([Range(1, int.MaxValue)] int id )
+        public async Task<ActionResult<StudentToGet>> Delete([Range(1, int.MaxValue)] int id )
         {
             var subject = subjetcsService.GetSubjectById(id);
 

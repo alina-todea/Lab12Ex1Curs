@@ -92,7 +92,7 @@ namespace CatalogAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(MarkToGet))]
 
-        public async Task<ActionResult<MarkToGet>> GiveMarkAsync([FromBody] MarkToCreate markToCreate)
+        public async Task<ActionResult<MarkToGet>> GiveMark([FromBody] MarkToCreate markToCreate)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace CatalogAPI.Controllers
 
             var newMark = await marksService.GiveMarkAsync(markToCreate);
             
-            return CreatedAtAction(nameof(GiveMarkAsync), new { id = newMark.Id }, newMark.ToDto());
+            return CreatedAtAction(nameof(GiveMark), new { id = newMark.Id }, newMark.ToDto());
         }
 
     }

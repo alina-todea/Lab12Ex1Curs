@@ -23,10 +23,10 @@ namespace CatalogAPI.Controllers
             this.studentsService = studentsService;
             this.subjetcsService = subjetcsService;
         }
-      
+
         // POST api/values
         /// <summary>
-        /// enrolls a student in a subject
+        /// enrolls a student in a subject. partially working. it creates a new enrollment, but it does not set to active a previous inactive enrollment
         /// </summary>
         /// <param name="enrollment">student id an subject id</param>
         /// <returns>returns created enrollment</returns>
@@ -36,7 +36,7 @@ namespace CatalogAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(StudentEnrollmentToGet))]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
 
-        public async Task<ActionResult> EnrollStudentInSubjectAsync([FromBody] StudentEnrollmentToCreate enrollment)
+        public async Task<ActionResult> EnrollStudentInSubject([FromBody] StudentEnrollmentToCreate enrollment)
         {
             try
             { 
@@ -65,6 +65,7 @@ namespace CatalogAPI.Controllers
             {
                 return Conflict(e.Message);
             }
+            
         }
 
         /// <summary>

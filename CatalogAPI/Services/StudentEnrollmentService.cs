@@ -75,7 +75,7 @@ namespace CatalogAPI.Services
         {
             using var ctx = new UniversityDbContext();
 
-            var studentEnrollmentToAdd =  GetStudentEnrollment(studentId, subjectId);
+            var existingStudentEnrollment =  GetStudentEnrollment(studentId, subjectId);
 
             var studentEnrollment = new StudentEnrollment
             {
@@ -85,7 +85,7 @@ namespace CatalogAPI.Services
                 AvgMark = 0
             };
 
-            if (studentEnrollmentToAdd == null)
+            if (existingStudentEnrollment == null)
             {
                 ctx.StudentEnrollments.Add(studentEnrollment);
                 await ctx.SaveChangesAsync();
@@ -93,15 +93,15 @@ namespace CatalogAPI.Services
             }
             else
             {
-                if (studentEnrollmentToAdd.IsActiveEnrollment == true)
+                if (existingStudentEnrollment.IsActiveEnrollment == true)
                 {
                     throw new DuplicateException("student already enrolled");
                 }
                 else
                 {
-                   studentEnrollmentToAdd.IsActiveEnrollment = true;
+                    existingStudentEnrollment.IsActiveEnrollment = true;
                     await ctx.SaveChangesAsync();
-                    return studentEnrollmentToAdd;
+                    return existingStudentEnrollment;
                 }
             }
             
@@ -129,9 +129,11 @@ namespace CatalogAPI.Services
             else
             {
                 studentEnrollmentToRemove.IsActiveEnrollment = false;
+                await ctx.SaveChangesAsync();
+
             }
 
-             await ctx.SaveChangesAsync();
+            await ctx.SaveChangesAsync();
              return studentId;
         }
 

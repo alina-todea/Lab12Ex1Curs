@@ -64,12 +64,12 @@ namespace CatalogAPI.Controllers
          [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(StudentToCreate))]
-        public async Task<ActionResult<int>> UpdateAddressAsync([Range(1, int.MaxValue)] int id, [FromBody] AddressToCreate address)
+        public async Task<ActionResult<int>> UpdateAddress([Range(1, int.MaxValue)] int id, [FromBody] AddressToCreate address)
 
         {
             var addressId = await addressesService.UpdateAddressAsync(id, address);
 
-            return CreatedAtAction(nameof(UpdateAddressAsync), new { id = addressId });
+            return CreatedAtAction(nameof(UpdateAddress), new { id = addressId });
         }
     }
 }
